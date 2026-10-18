@@ -1,0 +1,64 @@
+# ============================================================
+# reference/theory-reference.toml
+# ============================================================
+# Theory reference configuration.
+#
+# The theory repository owns Lean source, reference TOML, and
+# generated JSON artifacts. The reusable reference kit owns the
+# generic validation, export, catalog, scaffold, and inspection
+# machinery.
+
+schema = "se-theory-reference"
+schema_version = "0.1.0"
+
+# === Repository Identity ===
+
+[repository]
+organization = "structural-explainability"
+name = "se-theory-coreference"
+theory = "coreference"
+description = "Coreference theory repository for Structural Explainability."
+
+# === Lean Public Surface ===
+
+[lean]
+root_module = "SE"
+
+public_modules = [
+    "SE",
+    "SE.Coreference",
+    # Get the following with:
+    # Get-ChildItem .\SE\Coreference -Recurse -Filter *.lean |
+    # ForEach-Object { $_.FullName.Substring((Get-Location).Path.Length + 1) } |
+    # Sort-Object
+    "SE.Coreference.ContextualCommitments",
+]
+
+test_modules = ["SETest"]
+
+# === Reference Artifacts ===
+
+[reference]
+root = "reference"
+
+# === Exported Machine Artifacts ===
+
+[export]
+root = "data/coreference"
+
+# === Reference-Kind Mapping ===
+#
+# Generic Lean-surface kinds register public theory concepts.
+# Coreference has no finite domain catalog of its own, so there are
+# no domain catalog kinds; only the generated catalog is exported.
+
+[surface_kinds]
+type = "reference/coreference-types.toml"
+vocabulary = "reference/coreference-vocabulary.toml"
+predicate = "reference/coreference-predicates.toml"
+theorem = "reference/coreference-theorems.toml"
+
+# === Export Mapping ===
+
+[export_map]
+catalog = "data/coreference/coreference-catalog.json"

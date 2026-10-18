@@ -1,0 +1,53 @@
+# ============================================================
+# Coreference Theorems
+# se-theory-coreference
+# ============================================================
+# Public semantic theorems for the Coreference theory.
+#
+# Finite witnesses in SETest are intentionally not registered here.
+
+schema = "se-theorem-registry-1"
+kind = "theorem"
+repo = "se-theory-coreference"
+surface_module = "SE.Coreference"
+namespace = "SE.Coreference"
+
+[theorem.CoReferenceImpGeneratedCoReference]
+order = 1
+id = "CoReferenceImpGeneratedCoReference"
+cite_id = "COREF.THM.CO_REFERENCE_IMP_GENERATED_CO_REFERENCE"
+name = "Co-reference implies generated co-reference"
+lean_symbol = "SE.Coreference.coReference_imp_generatedCoReference"
+lean_kind = "theorem"
+source_module = "SE.Coreference.ContextualCommitments"
+description = "Whatever the account judges co-referent in a context is generated co-referent."
+
+[theorem.GeneratedCoReferenceIffOfEquivalence]
+order = 2
+id = "GeneratedCoReferenceIffOfEquivalence"
+cite_id = "COREF.THM.GENERATED_CO_REFERENCE_IFF_OF_EQUIVALENCE"
+name = "Generated co-reference iff, given equivalence"
+lean_symbol = "SE.Coreference.generatedCoReference_iff_of_equivalence"
+lean_kind = "theorem"
+source_module = "SE.Coreference.ContextualCommitments"
+description = "When the account's co-reference in a context is already an equivalence relation, closure adds no pairs. Whether closure is warranted otherwise is not settled by this theorem."
+
+[theorem.ContextConsistentIffExistsAdmissible]
+order = 3
+id = "ContextConsistentIffExistsAdmissible"
+cite_id = "COREF.THM.CONTEXT_CONSISTENT_IFF_EXISTS_ADMISSIBLE"
+name = "Context consistent iff admissible relation exists"
+lean_symbol = "SE.Coreference.contextConsistent_iff_exists_admissible"
+lean_kind = "theorem"
+source_module = "SE.Coreference.ContextualCommitments"
+description = "In a context, the commitments are consistent exactly when some admissible identity relation exists."
+
+[theorem.UndeterminedOfNotGeneratedCoReferenceOfNoDistinct]
+order = 4
+id = "UndeterminedOfNotGeneratedCoReferenceOfNoDistinct"
+cite_id = "COREF.THM.UNDETERMINED_OF_NOT_GENERATED_CO_REFERENCE_OF_NO_DISTINCT"
+name = "Undetermined without distinct-commitments"
+lean_symbol = "SE.Coreference.undetermined_of_not_generatedCoReference_of_no_distinct"
+lean_kind = "theorem"
+source_module = "SE.Coreference.ContextualCommitments"
+description = "With no distinct-commitments, a pair that is not generated co-referent is undetermined, not distinct. The failure to establish co-reference is not evidence of distinctness."

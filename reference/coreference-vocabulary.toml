@@ -1,0 +1,11 @@
+# ============================================================
+# Coreference Vocabulary
+# se-theory-coreference
+# ============================================================
+# Public Lean definitions that are not Prop-valued.
+
+schema = "se-vocabulary-registry-1"
+kind = "vocabulary"
+repo = "se-theory-coreference"
+surface_module = "SE.Coreference"
+namespace = "SE.Coreference"

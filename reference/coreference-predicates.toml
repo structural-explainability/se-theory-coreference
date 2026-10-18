@@ -1,0 +1,31 @@
+# ============================================================
+# Coreference Predicates
+# se-theory-coreference
+# ============================================================
+# Public Prop-valued definitions: generated co-reference and contextual consistency.
+
+schema = "se-predicate-registry-1"
+kind = "predicate"
+repo = "se-theory-coreference"
+surface_module = "SE.Coreference"
+namespace = "SE.Coreference"
+
+[predicate.GeneratedCoReference]
+order = 1
+id = "GeneratedCoReference"
+cite_id = "COREF.DEF.GENERATED_CO_REFERENCE"
+name = "Generated co-reference"
+lean_symbol = "SE.Coreference.GeneratedCoReference"
+lean_kind = "def"
+source_module = "SE.Coreference.ContextualCommitments"
+description = "Two references are linked by the equivalence closure of the account's co-reference in a context. The closure can establish pairs the account does not; it coincides with the account's co-reference only under hypotheses such as equivalence. Universe 0, as Persistence is stated."
+
+[predicate.ContextConsistent]
+order = 2
+id = "ContextConsistent"
+cite_id = "COREF.DEF.CONTEXT_CONSISTENT"
+name = "Context consistent"
+lean_symbol = "SE.Coreference.ContextConsistent"
+lean_kind = "def"
+source_module = "SE.Coreference.ContextualCommitments"
+description = "In a context, the account's co-reference and the distinct-commitments are consistent in the sense of Persistence."

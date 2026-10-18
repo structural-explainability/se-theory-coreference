@@ -1,0 +1,21 @@
+# ============================================================
+# Coreference Types
+# se-theory-coreference
+# ============================================================
+# Public Lean types for the Coreference theory.
+
+schema = "se-type-registry-1"
+kind = "type"
+repo = "se-theory-coreference"
+surface_module = "SE.Coreference"
+namespace = "SE.Coreference"
+
+[type.DistinctCommitments]
+order = 1
+id = "DistinctCommitments"
+cite_id = "COREF.TYPE.DISTINCT_COMMITMENTS"
+name = "Distinct commitments"
+lean_symbol = "SE.Coreference.DistinctCommitments"
+lean_kind = "structure"
+source_module = "SE.Coreference.ContextualCommitments"
+description = "Independently warranted distinct-commitments in each context of a co-reference account. They are a separate input and are not derived from the failure of co-reference."
