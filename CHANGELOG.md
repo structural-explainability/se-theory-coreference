@@ -11,6 +11,12 @@ and this project adheres to **[Semantic Versioning](https://semver.org/spec/v2.0
 
 ## [Unreleased]
 
+- updated available GitHub action versions
+- Clarified the distinction between generated co-reference and scientifically warranted referent identity.
+- Recorded counterexamples and the evidence-limited DCS finding.
+- Identified outstanding denotation, attribution, and cross-context warrant obligations.
+- Corrected repository descriptions of generated equivalence.
+
 ---
 
 ## [0.1.0] - 2026-10-18
@@ -69,6 +75,7 @@ uvx gha-tools autoupdate --pin=all --write .github/workflows
 # NO .github\workflows\deploy-zensical.yml
 # YES  .github\workflows\deploy-zensical-lean.yml
 uvx zizmor@latest .github/
+# Some suppressed is still okay
 
 # Validate.
 uvx cffconvert --validate

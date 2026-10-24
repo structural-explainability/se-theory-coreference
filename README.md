@@ -17,8 +17,9 @@ Coreference asks when two references are treated as referring to the same
 referent, in a stated context.
 
 This repository defines the formal vocabulary and relations needed to reason
-about context-indexed co-reference judgments, the identity relation those
-judgments generate, and the distinct-commitments kept separate from them.
+about context-indexed co-reference judgments, the equivalence relation
+generated from those judgments, and the distinct-commitments kept separate
+from them.
 
 It does not own the abstract co-reference account (Neutral Substrate), the
 commitment calculus (Persistence), or whole formation and same-unit judgments

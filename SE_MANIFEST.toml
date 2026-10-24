@@ -22,7 +22,7 @@ class = "theory"
 kind = "foundation"
 status = "active"
 since = "2026"
-summary = "Lean 4 formalization of foundational coreference theory: context-indexed co-reference judgments, the identity relation they generate, and the distinct-commitments kept separate from them."
+summary = "Lean 4 formalization of context-indexed co-reference commitments, their generated equivalence relation, and separate distinct-commitments and consistency conditions."
 
 # === Layer Position ===
 
