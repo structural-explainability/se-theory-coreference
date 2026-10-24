@@ -69,7 +69,7 @@ excludes = [
   "transformation kind definitions",
   "neutral substrate primitive definitions",
   "mapping semantics",
-  "commitment calculus",
+  "identity-commitment calculus owned by se-theory-persistence",
   "whole formation and same-unit judgments",
   "operational validation logic",
   "domain-specific interpretation",
