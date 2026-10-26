@@ -1,7 +1,7 @@
 # ============================================================
 # .github/workflows/deploy-zensical-lean.yml (CUSTOM LEAN+ALL-PY-REPOS)
 # ============================================================
-# Updated: 2026-10-18 CUSTOM
+# Updated: 2026-10-26 CUSTOM
 #
 # WHY: Build and deploy documentation to GitHub Pages on pushes to main.
 # REQ: Repo Settings -> Pages -> Build and deployment -> Source:
@@ -158,40 +158,51 @@ jobs:
           MATHLIB_NO_CACHE_ON_UPDATE=1 lake update doc-gen4
           lake update se-theory-coreference
 
-          # Build first so the .olean files exist.
+          # Build all theory libraries first so their .olean files exist.
+          lake build SE.NeutralSubstrate
+          lake build SE.Persistence
           lake build SE.Coreference
 
-          # Lean resolves an import by the first search-path entry that has a
-          # directory named after the module's first component. Coreference and
-          # the theory packages it requires all live under SE/, so expose each
-          # package's SE tree inside every other package's lib dir before
-          # doc-gen4 runs.
-          COREFERENCE_LIB="$GITHUB_WORKSPACE/.lake/build/lib/lean"
-          SUBSTRATE_LIB="$GITHUB_WORKSPACE/.lake/packages/se-theory-neutral-substrate/.lake/build/lib/lean"
-          INDIVIDUATION_LIB="$GITHUB_WORKSPACE/.lake/packages/se-theory-individuation/.lake/build/lib/lean"
-          PERSISTENCE_LIB="$GITHUB_WORKSPACE/.lake/packages/se-theory-persistence/.lake/build/lib/lean"
+          # These packages all own modules below the shared SE.* namespace.
+          #
+          # Lean resolves imports through search-path entries. If one package's
+          # lib directory provides SE/ first, modules owned by another package
+          # may be hidden from doc-gen4. Expose each package's SE tree in the
+          # other package lib directories before generating documentation.
+
+          THIS_LIB="$GITHUB_WORKSPACE/.lake/build/lib/lean"
+          NS_LIB="$GITHUB_WORKSPACE/.lake/packages/se-theory-neutral-substrate/.lake/build/lib/lean"
+          PERSIST_LIB="$GITHUB_WORKSPACE/.lake/packages/se-theory-persistence/.lake/build/lib/lean"
+
           merge_se() {
-            src="$1"; dst="$2"
+            src="$1"
+            dst="$2"
+
             mkdir -p "$dst/SE"
+
             for f in "$src"/SE/* "$src"/SE.*; do
               [ -e "$f" ] || continue
+
               rel="${f#"$src"/}"
-              [ -e "$dst/$rel" ] || [ -L "$dst/$rel" ] || ln -s "$f" "$dst/$rel"
+
+              if [ ! -e "$dst/$rel" ] && [ ! -L "$dst/$rel" ]; then
+                ln -s "$f" "$dst/$rel"
+              fi
             done
           }
-          merge_se "$SUBSTRATE_LIB" "$COREFERENCE_LIB"
-          merge_se "$INDIVIDUATION_LIB" "$COREFERENCE_LIB"
-          merge_se "$PERSISTENCE_LIB" "$COREFERENCE_LIB"
-          merge_se "$COREFERENCE_LIB" "$SUBSTRATE_LIB"
-          merge_se "$INDIVIDUATION_LIB" "$SUBSTRATE_LIB"
-          merge_se "$PERSISTENCE_LIB" "$SUBSTRATE_LIB"
-          merge_se "$COREFERENCE_LIB" "$INDIVIDUATION_LIB"
-          merge_se "$SUBSTRATE_LIB" "$INDIVIDUATION_LIB"
-          merge_se "$PERSISTENCE_LIB" "$INDIVIDUATION_LIB"
-          merge_se "$COREFERENCE_LIB" "$PERSISTENCE_LIB"
-          merge_se "$SUBSTRATE_LIB" "$PERSISTENCE_LIB"
-          merge_se "$INDIVIDUATION_LIB" "$PERSISTENCE_LIB"
+          # Make all three SE.* module families mutually visible to doc-gen4.
+          merge_se "$NS_LIB" "$THIS_LIB"
+          merge_se "$PERSIST_LIB" "$THIS_LIB"
 
+          merge_se "$THIS_LIB" "$NS_LIB"
+          merge_se "$PERSIST_LIB" "$NS_LIB"
+
+          merge_se "$THIS_LIB" "$PERSIST_LIB"
+          merge_se "$NS_LIB" "$PERSIST_LIB"
+
+          # Generate API documentation for the complete theory dependency chain.
+          lake build SE.NeutralSubstrate:docs
+          lake build SE.IdentityRegimes:docs
           lake build SE.Coreference:docs
 
       - name: BB3) Verify Lean API output
