@@ -7,15 +7,14 @@
 # Run with:
 # lake build
 # lake test
-# lake lint
 
 # ============================================================
 # === PROJECT IDENTITY ===
 # ============================================================
 
 name = "se-theory-coreference"
-version = "0.1.0"
-license = "MIT"
+version = "0.2.0"
+license = "Apache-2.0"
 
 # ============================================================
 # === BUILD SURFACE ===
@@ -24,52 +23,20 @@ license = "MIT"
 
 defaultTargets = ["SE.Coreference"]
 testDriver = "SETest"
-lintDriver = "SELint"
 
 # ============================================================
 # === DEPENDENCIES ===
 # ============================================================
 
 [[require]]
-# Mathlib provides standard infrastructure used by this library.
-# Mathlib release must match the Lean version in lean-toolchain.
-name = "mathlib"
-scope = "leanprover-community"
-rev = "v4.34.0"
-
-[[require]]
 name = "se-theory-neutral-substrate"
 git = "https://github.com/structural-explainability/se-theory-neutral-substrate"
-rev = "v0.11.0"
-
-[[require]]
-name = "se-theory-individuation"
-git = "https://github.com/structural-explainability/se-theory-individuation"
-rev = "v0.1.1"
+rev = "v0.12.1"
 
 [[require]]
 name = "se-theory-persistence"
 git = "https://github.com/structural-explainability/se-theory-persistence"
-rev = "v0.5.0"
-
-# ============================================================
-# === LEAN OPTIONS ===
-# ============================================================
-
-[leanOptions]
-weak.linter.mathlibStandardSet = true
-weak.linter.flexible = true
-weak.linter.style.header = false
-weak.linter.style.longLine = false
-
-# These linters are included in Mathlib's standard set but do
-# not currently operate correctly in downstream projects.
-weak.linter.pythonStyle = false
-weak.linter.checkInitImports = false
-weak.linter.allScriptsDocumented = false
-
-# This linter is not extensible for Unicode outside Mathlib's set.
-weak.linter.unicodeLinter = false
+rev = "v0.6.0"
 
 # ============================================================
 # === PUBLIC LIBRARY ===
@@ -85,10 +52,6 @@ weak.linter.unicodeLinter = false
 #   "A.B"    only module A.B
 #   "A.B.*"  A.B and all its submodules
 #   "A.B.+"  all submodules of A.B, but not A.B itself
-#
-# Use ".*" when the family has a root module such as SE/Coreference.lean.
-# Use ".+" for a submodule directory that has no corresponding root .lean
-# file when that family is listed separately.
 
 [[lean_lib]]
 name = "SE.Coreference"
@@ -105,14 +68,3 @@ globs = ["SE.Coreference.*"]
 name = "SETest"
 roots = ["SETest.Coreference"]
 globs = ["SETest", "SETest.Coreference.*"]
-leanOptions = { weak.linter.style.header = false }
-
-
-# ============================================================
-# === LINT DRIVER ===
-# ============================================================
-
-[[lean_exe]]
-name = "SELint"
-root = "SELint"
-leanOptions = { Elab.inServer = true }
