@@ -1,7 +1,7 @@
 # SE Theory: Coreference
 
-Lean 4 formalization of foundational
-Coreference theory for Structural Explainability.
+> Lean 4 formalization of foundational
+> Coreference theory for Structural Explainability.
 
 Coreference asks when two references are treated as referring
 to the same referent, in a stated context.
@@ -10,8 +10,13 @@ This repository formalizes context-indexed co-reference judgments,
 the equivalence relation generated from those judgments, and the
 distinct-commitments kept separate from them.
 
+Lean source files under `SE/` are authoritative for formal definitions,
+predicates, assumptions, theorems, and proof obligations.
+
 - [Lean API Reference](https://structural-explainability.github.io/se-theory-coreference/lean/)
 - [GitHub Repository](https://github.com/structural-explainability/se-theory-coreference)
+- - [Research Doubts and Open Questions](https://github.com/structural-explainability/se-theory-coreference/blob/main/DOUBTS.md)
+- [Research Decisions](https://github.com/structural-explainability/se-theory-coreference/blob/main/DECISIONS.md)
 
 ## Coreference
 
@@ -93,38 +98,6 @@ test capable of discriminating competing acquisition histories.
 Independence of evidence is not imposed as a universal requirement.
 Its relevance depends on the claimed conclusion and the applicable
 error or attribution model.
-
-### Outstanding Scientific Obligations
-
-The theory has not established:
-
-- when a reference successfully denotes one intended referent;
-- when separately produced records warrant a positive co-reference judgment;
-- when a generated co-reference link is scientifically sound;
-- when co-reference judgments may be transported across contexts;
-- which evidence and assumptions justify those conclusions for an
-  intended referent kind.
-
-An undetermined judgment must not be promoted to either co-reference
-or distinctness merely to produce a definite result.
-
-## Dependencies
-
-This repository is a theory-layer repository
-for Structural Explainability.
-
-It depends on Mathlib and on three Structural Explainability
-theory repositories:
-
-- Neutral Substrate, for the abstract co-reference account
-- Persistence, for the commitment calculus
-- Individuation, for successful presentations and same-unit judgments
-
-It does not import Transformation's operator taxonomy,
-effect dimensions, or state models.
-
-The current formal development specializes accounts to universe 0,
-as Persistence is stated for carriers in `Type`.
 
 ## Scope
 
